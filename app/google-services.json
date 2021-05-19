@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "61891144035",
+    "project_id": "kotlinexample-68c54",
+    "storage_bucket": "kotlinexample-68c54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61891144035:android:55389a21edaa7f48f48b56",
+        "android_client_info": {
+          "package_name": "com.example.praktika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61891144035-3feqmgslt6tmpp5r4cl9lohtf9b1o2i2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.praktika",
+            "certificate_hash": "7f5c96e0eb56b7c847c78a9875a7a68c22b37161"
+          }
+        },
+        {
+          "client_id": "61891144035-i9o0bre9ueejhe1f8uc4u58euq45redo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZGe7uFLLjM3-Fio0U-IC-jmhXwP5xky8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61891144035-i9o0bre9ueejhe1f8uc4u58euq45redo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

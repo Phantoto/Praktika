@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Доска объявлений</string>
+    <string name="open">Вход</string>
+    <string name="close">Выход</string>
+    <!--Menu Drawer Strings-->
+    <string name="ad_cat1">Объявления</string>
+    <string name="ad_my_ads">Мои объявления</string>
+    <string name="ad_car">Машины</string>
+    <string name="ad_pc">Компьютеры</string>
+    <string name="ad_smartphone">Смартфоны</string>
+    <string name="ad_dm">Бытовая техника</string>
+    <string name="ad_cat2">Аккаунт</string>
+    <string name="ad_sign_up">Регистрация</string>
+    <string name="ad_sign_in">Вход</string>
+    <string name="ad_sign_out">Выход</string>
+    <string name="not_reg">Войдите или зарегистрируйтесь</string>
+    <!--Sign Dialog-->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_up_action">Зарегистрироваться</string>
+    <string name="sign_in_action">Войти</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="sign_up_error">Не удалось зарегистрироваться</string>
+    <string name="sign_in_error">Не удалось войти</string>
+    <string name="send_verification_error">Не удалось отправить ссылку</string>
+    <string name="send_verification_done">На вашу почту была отправлена ссылка для потдверждения вашего аккаунта</string>
+    <string name="email_reset_password_was_sent">Reset email was sent</string>
+    <string name="dialog_reset_email_message">Для восстановления пароля укажите ваш почтовый адрес</string>
+</resources>
