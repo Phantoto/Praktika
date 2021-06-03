@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.sax.RootElement
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import com.example.praktika.act.EditAdsAct
 import com.example.praktika.databinding.ActivityMainBinding
 import com.example.praktika.dialoghelper.DialogConst
 import com.example.praktika.dialoghelper.DialogHelper
@@ -60,11 +62,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     private fun init()
     {
+        setSupportActionBar(rootElement.mainContent.toolbar)
         var toggle = ActionBarDrawerToggle(this, rootElement.drawerLayout,rootElement.mainContent.toolbar, R.string.open,R.string.close)
         tvAccount = rootElement.navView.getHeaderView(0).findViewById(R.id.tvAccountEmail)
         rootElement.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         rootElement.navView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.id_new_ads){
+            val  i = Intent(this, EditAdsAct::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -96,7 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.id_sign_out ->{
                 uiUpdate(null)
                 mAuth.signOut()
-                Toast.makeText(this,"Pressed id_sign_out", Toast.LENGTH_LONG).show()
+                dialogHelper.accHelper.signOutGoogle()
             }
         }
         rootElement.drawerLayout.closeDrawer(GravityCompat.START)

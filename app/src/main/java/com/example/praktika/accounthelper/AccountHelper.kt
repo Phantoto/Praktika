@@ -16,36 +16,34 @@ class AccountHelper (act:MainActivity){
     private val act = act
     private lateinit var signInClient: GoogleSignInClient
     //val signInRequestCode = 132
-    fun signUpWithEmail(email: String, password: String){
-        if(email.isNotEmpty()&& password.isNotEmpty()){
-            act.mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {task ->
-                if (task.isSuccessful){
+    fun signUpWithEmail(email: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            act.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     sendEmailVerification(task.result?.user!!)
                     act.uiUpdate(task.result?.user!!)
-                }
-                else
-                {
+                } else {
                     //Toast.makeText(act,act.resources.getString(R.string.sign_up_error),Toast.LENGTH_LONG).show()
                     //Log.d("LogISIP", "Exception: +" + task.exception)
-                    if(task.exception is FirebaseAuthInvalidCredentialsException){
+                    if (task.exception is FirebaseAuthUserCollisionException) {
+                        val exception = task.exception as FirebaseAuthUserCollisionException
+                        //Log.d("LogISIP", "Exception: ${exception.errorCode}")
+                        if (exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE) {
+                            linkEmailToG(email, password)
+                        }
+                    }
+                    else if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         val exception = task.exception as FirebaseAuthInvalidCredentialsException
                         //Log.d("LogISIP", "Exception: ${exception.errorCode}")
-                        if (exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL){
+                        if (exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_INVALID_EMAIL, Toast.LENGTH_LONG).show()
                         }
                     }
-                    if(task.exception is FirebaseAuthWeakPasswordException){
+                    if (task.exception is FirebaseAuthWeakPasswordException) { //маленький пароль
                         val exception = task.exception as FirebaseAuthWeakPasswordException
                         //Log.d("LogISIP", "Exception: ${exception.errorCode}")
-                        if (exception.errorCode == FirebaseAuthConstants.ERROR_WEAK_PASSWORD){
+                        if (exception.errorCode == FirebaseAuthConstants.ERROR_WEAK_PASSWORD) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_WEAK_PASSWORD, Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    if(task.exception is FirebaseAuthUserCollisionException){
-                        val exception = task.exception as FirebaseAuthUserCollisionException
-                        //Log.d("LogISIP", "Exception: ${exception.errorCode}")
-                        if (exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE){
-                            Toast.makeText(act, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -103,5 +101,23 @@ class AccountHelper (act:MainActivity){
             }
 
         }
+    }
+
+    fun linkEmailToG(email: String, password: String) {
+        val credential: AuthCredential = EmailAuthProvider.getCredential(email, password)
+        if (act.mAuth.currentUser != null) {
+            act.mAuth.currentUser?.linkWithCredential(credential)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(act, act.resources.getString(R.string.link_done), Toast.LENGTH_LONG).show()
+                }
+            }
+        } else {
+            Toast.makeText(act, act.resources.getString(R.string.enter_to_G), Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    fun signOutGoogle(){
+        getSignInClient().signOut()
     }
 }

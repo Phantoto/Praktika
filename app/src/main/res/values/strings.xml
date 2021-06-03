@@ -26,4 +26,10 @@
     <string name="send_verification_done">На вашу почту была отправлена ссылка для потдверждения вашего аккаунта</string>
     <string name="email_reset_password_was_sent">Reset email was sent</string>
     <string name="dialog_reset_email_message">Для восстановления пароля укажите ваш почтовый адрес</string>
+    <string name="link_done">Email успешно подключен</string>
+    <string name="enter_to_G">У вас уже есть аккаунт с этим Email, пожалуйста войдите под ним</string>
+    <string name="select_country">*Выберите страну</string>
+    <string name="select_city">*Выберите город</string>
+    <string name="attention_country">Необходимо выбрать страну</string>
+    <string name="back_btn">Назад</string>
 </resources>

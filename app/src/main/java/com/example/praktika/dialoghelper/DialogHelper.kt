@@ -8,9 +8,9 @@ import com.example.praktika.R
 import com.example.praktika.accounthelper.AccountHelper
 import com.example.praktika.databinding.SignDialogBinding
 
-class DialogHelper(act:MainActivity){
+class DialogHelper(act:MainActivity) {
     private val act = act
-     val accHelper = AccountHelper(act)
+    val accHelper = AccountHelper(act)
 
     fun createSignDialog(index:Int){
         val builder = AlertDialog.Builder(act)
@@ -33,6 +33,7 @@ class DialogHelper(act:MainActivity){
 
         rootDialogElement.btnGoogleSignIn.setOnClickListener{
             accHelper.signInWithGoogle()
+            dialog.dismiss()
         }
         dialog.show()
 
@@ -43,7 +44,7 @@ class DialogHelper(act:MainActivity){
         if (rootDialogElement.edSignEmail.text.isNotEmpty()){
             act.mAuth.sendPasswordResetEmail(rootDialogElement.edSignEmail.text.toString()).addOnCompleteListener { task ->
                 if (task.isSuccessful){
-                    Toast.makeText(act,R.string.email_reset_password_was_sent,Toast.LENGTH_LONG).show()
+                    Toast.makeText(act, R.string.email_reset_password_was_sent, Toast.LENGTH_LONG).show()
                 }
             }
             dialog?.dismiss()
@@ -82,4 +83,3 @@ class DialogHelper(act:MainActivity){
         }
     }
 }
-
